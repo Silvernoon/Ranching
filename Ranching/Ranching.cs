@@ -16,7 +16,7 @@ namespace Ranching;
 public class Ranching : BaseUnityPlugin
 {
 	private const string ModName = "Ranching";
-	private const string ModVersion = "1.1.0";
+	private const string ModVersion = "1.1.1";
 	private const string ModGUID = "org.bepinex.plugins.ranching";
 
 	private static readonly ConfigSync configSync = new(ModGUID) { DisplayName = ModName, CurrentVersion = ModVersion, MinimumRequiredVersion = ModVersion };
@@ -227,7 +227,7 @@ public class Ranching : BaseUnityPlugin
 		{
 			__instance.CancelInvoke(nameof(Procreation.Procreate));
 			double time = ZNet.instance.GetTimeSeconds();
-        	__instance.InvokeRepeating(nameof(Procreation.Procreate), (float)(__instance.m_updateInterval - time % __instance.m_updateInterval + ProcreationTimeOffset(__instance)) % __instance.m_updateInterval, __instance.m_updateInterval);
+			__instance.InvokeRepeating(nameof(Procreation.Procreate), (float)(__instance.m_updateInterval - time % __instance.m_updateInterval + ProcreationTimeOffset(__instance)) % __instance.m_updateInterval, __instance.m_updateInterval);
 		}
 	}
 }
