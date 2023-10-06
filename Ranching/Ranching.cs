@@ -17,7 +17,7 @@ namespace Ranching;
 public class Ranching : BaseUnityPlugin
 {
 	private const string ModName = "Ranching";
-	private const string ModVersion = "1.1.2";
+	private const string ModVersion = "1.1.3";
 	private const string ModGUID = "org.bepinex.plugins.ranching";
 
 	private static readonly ConfigSync configSync = new(ModGUID) { DisplayName = ModName, CurrentVersion = ModVersion, MinimumRequiredVersion = ModVersion };
@@ -46,7 +46,7 @@ public class Ranching : BaseUnityPlugin
 	private enum Toggle
 	{
 		On = 1,
-		Off = 0
+		Off = 0,
 	}
 
 	private class ConfigurationManagerAttributes
@@ -120,7 +120,7 @@ public class Ranching : BaseUnityPlugin
 						__result[i] = new KeyValuePair<GameObject, int>(__result[i].Key, __result[i].Value * (1 + increase));
 					}
 
-					closestPlayer.m_nview.InvokeRPC("Ranching IncreaseSkill", 35);
+					closestPlayer.m_nview.InvokeRPC("Ranching IncreaseSkill", 50);
 				}
 			}
 		}
@@ -136,7 +136,7 @@ public class Ranching : BaseUnityPlugin
 				time *= 1 + closestPlayer.m_nview.GetZDO().GetFloat("Ranching Skill") * (ranchingTamingFactor.Value - 1);
 				if (Random.Range(0, 10) == 0)
 				{
-					closestPlayer.m_nview.InvokeRPC("Ranching IncreaseSkill", 5);
+					closestPlayer.m_nview.InvokeRPC("Ranching IncreaseSkill", 7);
 				}
 			}
 		}
@@ -149,7 +149,7 @@ public class Ranching : BaseUnityPlugin
 
 		private static void Prefix(MonsterAI __instance)
 		{
-			if (__instance.m_character.GetComponent<Tameable>()?.GetTameness() > 0)
+			if (__instance.m_character?.GetComponent<Tameable>()?.GetTameness() > 0)
 			{
 				gettingTamed = true;
 			}
